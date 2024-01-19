@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\languages;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class InsertPreferredLanguage extends Controller
@@ -17,7 +18,7 @@ class InsertPreferredLanguage extends Controller
 
         $language = $request->input('language');
 
-        $lang = new Language();
+        $lang = new languages();
         $lang->language = $language;
         $lang->save();
 
