@@ -36,18 +36,20 @@ class LanguageController extends Controller
 
     public function setLanguage(Request $request)
     {
+
+        //'language' => 'required|exists:languages,language_code', enforce language from the select menu
         try {
             $validator = Validator::make($request->all(), [
-                'language' => 'required|exists:languages,language_code',
+                'language' => 'required',
             ]);
 
             if ($validator->fails()) {
                 return response()->json(['error' => 'Invalid input.'], 422);
             }
-
+                 // Retrieve 'language' input
             $language = $request->input('language');
 
-            // Assuming 'languages' is the model representing your languages table
+            //  'languages' is the model representing  languages table
             $lang = new Languages();
             $lang->language_code = $language;
             $lang->save();
