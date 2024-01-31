@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\languages;
 
+// namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
@@ -17,21 +19,21 @@ class InsertPreferredLanguage extends Controller
           $validator = Validator::make($request->all(), [
               'language' => 'required',
           ]);
-  
+
           if ($validator->fails()) {
               return response()->json(['error' => 'Invalid input.'], 422);
           }
-  
+
           $language = $request->input('language');
-  
+
           $lang = new languages();
           $lang->language = $language;
           $lang->save();
-  
+
           return response()->json(['message' => 'Language saved successfully.', 'data' => $lang]);
       } catch (\Exception $e) {
           return response()->json(['error' => 'Unable to save language.'], 500);
       }
   }
-  
+
 }

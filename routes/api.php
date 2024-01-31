@@ -11,8 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
+Route::get('/get_languages', [LanguageController::class, 'getLanguages']);
 
-    Route::get('/get_languages', [LanguageController::class, 'getLanguages']);
 
-  
-    Route::post('/preferred_language', [InsertPreferredLanguage::class, 'preferredLanguage']);
+Route::post('/preferred_language', [InsertPreferredLanguage::class, 'preferredLanguage']);
