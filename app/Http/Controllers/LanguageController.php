@@ -36,20 +36,20 @@ class LanguageController extends Controller
 
     public function setLanguage(Request $request)
     {
-
-        //'language' => 'required|exists:languages,language_code', enforce language from the select menu
         try {
-            $validator = Validator::make($request->all(), [
-                'language' => 'required',
-            ]);
+            // Remove the validation rule for now
+            // $validator = Validator::make($request->all(), [
+            //     'language' => 'required|exists:languages,language_code',
+            // ]);
 
-            if ($validator->fails()) {
-                return response()->json(['error' => 'Invalid input.'], 422);
-            }
-                 // Retrieve 'language' input
+            // Commenting out the validation for now
+            // if ($validator->fails()) {
+            //     return response()->json(['error' => 'Invalid input.'], 422);
+            // }
+
             $language = $request->input('language');
 
-            //  'languages' is the model representing  languages table
+            // Assuming 'languages' is the model representing your languages table
             $lang = new Languages();
             $lang->language_code = $language;
             $lang->save();
@@ -59,4 +59,35 @@ class LanguageController extends Controller
             return response()->json(['error' => 'Unable to save language.'], 500);
         }
     }
+
+
+    public function insertPreferredLanguage(Request $request)
+    {
+        try {
+            // Validation Block
+            $validator = Validator::make($request->all(), [
+                'language' => 'required',
+            ]);
+
+            // Check if validation fails
+            if ($validator->fails()) {
+                return response()->json(['error' => 'Invalid input.'], 422);
+            }
+
+            // Retrieve 'language' input
+            $language = $request->input('language');
+
+            // Database Interaction
+            $lang = new Languages();
+            $lang->language = $language;
+            $lang->save();
+
+            // Successful Response
+            return response()->json(['message' => 'Language saved successfully.', 'data' => $lang]);
+        } catch (\Exception $e) {
+            // Exception Handling
+            return response()->json(['error' => 'Unable to save language.'], 500);
+        }
+    }
+
 }
