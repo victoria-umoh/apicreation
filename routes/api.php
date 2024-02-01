@@ -14,8 +14,13 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 
+Route::get('/get_languages', [LanguageController::class, 'getLanguages']);
 
-    Route::get('/get_languages', [LanguageController::class, 'getLanguages']);
+Route::post('/preferred_language', [InsertPreferredLanguage::class, 'preferredLanguage']);
 
+<<<<<<< HEAD
+Route::post('/preferred_language', [LanguageController::class, 'setLanguage']);
+=======
 
     Route::post('/preferred_language', [LanguageController::class, 'insertPreferredLanguage']);
+>>>>>>> 52f8116d82521d42f8496624677cf3d48be88cee

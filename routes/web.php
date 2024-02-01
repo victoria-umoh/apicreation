@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\InsertPreferredLanguage;
 
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
