@@ -6,6 +6,7 @@ use App\Models\Languages;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class LanguageController extends Controller
 {
@@ -76,10 +77,13 @@ class LanguageController extends Controller
 
             // Retrieve 'language' input
             $language = $request->input('language');
+            //Get authenticated user
 
+            $user = Auth::user();
             // Database Interaction
             $lang = new Languages();
             $lang->language = $language;
+            $lang->user_id = $user->id; // Assign the user ID
             $lang->save();
 
             // Successful Response
